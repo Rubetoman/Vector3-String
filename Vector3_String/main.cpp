@@ -17,11 +17,13 @@ int main() {
 	std::cout << d.distance_to(b) << std::endl;
 	std::cout << dNor.x << dNor.y << dNor.z << std::endl << std::endl;
 
-	String a(*"hello");
+	String e("hello");
+	String f(e);
+	//String g = e + f;
 
 	std::cout << "String:" << std::endl;
-	std::cout << a << std::endl;
-
+	std::cout << e.get_string() << std::endl;
+	std::cout << f.get_string() << std::endl;
 
 	std::cin.get();
 }
