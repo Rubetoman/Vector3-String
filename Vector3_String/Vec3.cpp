@@ -1,41 +1,59 @@
-#include "Vec3.h"
 #include <cmath>
 
+template<typename T>
+class Vec3
+{
+public:
+	T x, y, z;
+	Vec3();
+	Vec3(T x, T y, T z);
+	Vec3(const Vec3& vec);
+	Vec3 operator+(Vec3 vec);
+	float distance_to(Vec3 vec);
+	Vec3 Normalize();
+	~Vec3();
+};
 
-Vec3::Vec3()
+template<typename T>
+Vec3<T>::Vec3()
 {
 }
 
-Vec3::Vec3(float x, float y, float z)
+template<typename T>
+Vec3<T>::Vec3(T x, T y, T z)
 	: x(x), y(y), z(z) 
 {
 }
 
-Vec3::Vec3(const Vec3& vec)
+template<typename T>
+Vec3<T>::Vec3(const Vec3& vec)
 	: x(vec.x), y(vec.y), z(vec.z)
 {
 }
 
-Vec3 Vec3::operator+(Vec3 vec) {
-	Vec3 newVec;
+template<typename T>
+Vec3<T> Vec3<T>::operator+(Vec3 vec) {
+	Vec3<T> newVec;
 	newVec.x = x + vec.x;
 	newVec.y = y + vec.y;
 	newVec.z = z + vec.z;
 	return newVec;
 }
 
-float Vec3::distance_to(Vec3 vec) {
+template<typename T>
+float Vec3<T>::distance_to(Vec3 vec) {
 	// sqrt((x2 - x1)^2 + (y2 - y1)^2 + (z2 - z1)^2) 
-	float sumX = vec.x - x;
-	float sumY = vec.y - y;
-	float sumZ = vec.z - z;
+	T sumX = vec.x - x;
+	T sumY = vec.y - y;
+	T sumZ = vec.z - z;
 	return sqrt(pow(sumX, 2) + pow(sumY, 2) + pow(sumY, 2));
 }
 
-Vec3 Vec3::Normalize() {
-	float lenght = distance_to(Vec3(.0f, .0f, .0f));
+template<typename T>
+Vec3<T> Vec3<T>::Normalize() {
+	float lenght = distance_to(Vec3<T>(.0f, .0f, .0f));
 
-	Vec3 newVec;
+	Vec3<T> newVec;
 	newVec.x = x / lenght;
 	newVec.y = y / lenght;
 	newVec.z = z / lenght;
@@ -43,6 +61,7 @@ Vec3 Vec3::Normalize() {
 	return newVec;
 }
 
-Vec3::~Vec3()
+template<typename T>
+Vec3<T>::~Vec3()
 {
 }

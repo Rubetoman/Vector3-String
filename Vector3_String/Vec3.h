@@ -1,12 +1,13 @@
 #ifndef VEC3_H
 #define VEC3_H
 
+template<typename T>
 class Vec3
 {
 public:
-	float x, y, z;
+	T x, y, z;
 	Vec3();
-	Vec3(float x, float y, float z);
+	Vec3(T x, T y, T z);
 	Vec3(const Vec3& vec);
 	Vec3 operator+(Vec3 vec);
 	float distance_to(Vec3 vec);

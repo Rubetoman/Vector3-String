@@ -1,4 +1,4 @@
-#include "String.h"
+//#include "String.h"
 
 String::String()
 	: lenght(0), str('\0')
