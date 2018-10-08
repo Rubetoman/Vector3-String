@@ -5,7 +5,7 @@
 class String
 {
 	char* str;
-	unsigned length;
+	unsigned len;
 
 public:
 	String();
@@ -13,7 +13,7 @@ public:
 	String(const char* ch);
 	String(const String& string);
 	~String();
-	unsigned len() const;
+	unsigned length() const;
 	void clear();
 
 	String& operator+= (const String& s);

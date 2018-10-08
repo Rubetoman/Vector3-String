@@ -3,13 +3,13 @@
 
 String::String()
 {
-	length = 0;
-	str = new char[length];
+	len = 0;
+	str = new char[len];
 }
 
 String::String(char ch)
 {
-	length = 1;
+	len = 1;
 	str = new char(ch);
 }
 
@@ -18,22 +18,22 @@ String::String(const char* ch)
 	if (ch) {
 		unsigned i = 0;
 		while (ch[i] != '\0') i++;
-		length = i;
+		len = i;
 		str = new char[i];
 		for (unsigned j = 0; j < i; j++)
 			str[j] = ch[j];
 	}
 	else {
-		length = 0;
-		str = new char[length];
+		len = 0;
+		str = new char[len];
 	}
 }
 
 String::String(const String& string)
 {
-	length = string.len();
-	str = new char[length];
-	for (unsigned j = 0; j < length; j++)
+	len = string.length();
+	str = new char[len];
+	for (unsigned j = 0; j < len; j++)
 		str[j] = string[j];
 }
 
@@ -43,39 +43,39 @@ String::~String()
 		delete[] this->str;
 }
 
-unsigned String::len() const {
-	return length;
+unsigned String::length() const {
+	return len;
 }
 
 void String::clear() {
-	length = 0;
+	len = 0;
 }
 
 char String::operator[] (unsigned j) const
 {
-	if (j >= length) throw 1;
+	if (j >= len) throw 1;
 	return str[j];
 }
 
 char& String::operator[] (unsigned j)
 {
-	if (j >= this->length) throw 1;
+	if (j >= this->len) throw 1;
 	return str[j];
 }
 
 String& String::operator+= (const String& s)
 {
-	unsigned len = length + s.len();
-	char*    newstr = new char[len];
+	unsigned total_length = len + s.length();
+	char*    newstr = new char[total_length];
 
-	for (unsigned j = 0; j < length; j++)
+	for (unsigned j = 0; j < len; j++)
 		newstr[j] = str[j];
 
-	for (unsigned i = 0; i < s.len(); i++)
-		newstr[length + i] = s[i];
+	for (unsigned i = 0; i < s.length(); i++)
+		newstr[len + i] = s[i];
 
 	delete str;
-	length = len;
+	len = total_length;
 	str = newstr;
 	return *this;
 }
@@ -86,9 +86,9 @@ String operator+(const String& string_a, const String& string_b) {
 
 std::ostream& operator<< (std::ostream& os, const String& s)
 {
-	if (s.len() > 0)
+	if (s.length() > 0)
 	{
-		for (unsigned j = 0; j < s.len(); j++)
+		for (unsigned j = 0; j < s.length(); j++)
 			os << s[j];
 	}
 	else os << "";
