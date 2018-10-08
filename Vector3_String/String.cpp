@@ -70,8 +70,8 @@ char& String::operator[] (unsigned j)
 
 String& String::operator+= (const String& s)
 {
-	unsigned length = len + s.length();
-	char*    newstr = new char[len];
+	unsigned total_length = len + s.length();
+	char*    newstr = new char[total_length];
 
 	for (unsigned j = 0; j < len; j++)
 		newstr[j] = str[j];
@@ -80,7 +80,7 @@ String& String::operator+= (const String& s)
 		newstr[len + i] = s[i];
 
 	delete str;
-	len = length;
+	len = total_length;
 	str = newstr;
 	return *this;
 }
@@ -123,10 +123,9 @@ std::istream& operator>> (std::istream& is, String& s)
 
 void strcpy(String& destination, String& source) {
 	unsigned j;
+	destination.setLength(source.length());
 	for (j = 0; j < source.length() ; j++)
 		destination[j] = source[j];
-
-	destination.setLength(j);
 }
 
 /*char* strcpy(char* destination, char* source)
