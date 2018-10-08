@@ -3,6 +3,8 @@
 #include "String.h"
 
 int main() {
+
+	// Vector3 class test
 	Vec3<float> a;
 	Vec3<float> b(1, 2, 3);
 	Vec3<float> c(b);
@@ -17,14 +19,25 @@ int main() {
 	std::cout << d.distance_to(b) << std::endl;
 	std::cout << "(" << dNor.x << "," << dNor.y << "," << dNor.z << ")" << std::endl << std::endl;
 
+	// String class test
 	String e("hello");
 	String f(e);
 	String g = e + f;
+	String h;
 
 	std::cout << "String:" << std::endl;
 	std::cout << e << std::endl;
 	std::cout << f << std::endl;
 	std::cout << g << std::endl;
 
+	//strcpy(h, e);
+
+	if(g == "hellohello")
+		std::cout << "true" << std::endl;
+
+	e.clear();
+	std::cout << e << std::endl;
+
+	// Wait for input
 	std::cin.get();
 }

@@ -5,7 +5,7 @@
 class String
 {
 	char* str;
-	unsigned length;
+	unsigned len;
 
 public:
 	String();
@@ -13,18 +13,20 @@ public:
 	String(const char* ch);
 	String(const String& string);
 	~String();
-	unsigned len() const;
+	unsigned length() const;
+	void setLength(unsigned l);
 	void clear();
 
 	String& operator+= (const String& s);
 	friend String operator+(const String& string_a, const String& string_b);
+	friend bool operator== (const String& string_a, const String& string_b);
 	char  operator[] (unsigned j) const;
 	char& operator[] (unsigned j);
 	friend std::ostream& operator<< (std::ostream& so, const String& s);
 	friend std::istream& operator>> (std::istream& so, String& s);
 };
 
-//char* strcpy(char *destination, char *source);
+void strcpy(String& destination, String& source);
 //char* strcpy(char* destination, char* source, int size);
 //char* strcat(char* destination, char* source);
 
