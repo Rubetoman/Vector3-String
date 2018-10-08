@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Vec3.cpp"
-//#include "String.h"
+#include "String.h"
 
 int main() {
 	Vec3<float> a;
@@ -17,13 +17,14 @@ int main() {
 	std::cout << d.distance_to(b) << std::endl;
 	std::cout << "(" << dNor.x << "," << dNor.y << "," << dNor.z << ")" << std::endl << std::endl;
 
-	/*String e("hello");
+	String e("hello");
 	String f(e);
-	//String g = e + f;
+	String g = e + f;
 
 	std::cout << "String:" << std::endl;
-	std::cout << e.get_string() << std::endl;
-	std::cout << f.get_string() << std::endl;*/
+	std::cout << e << std::endl;
+	std::cout << f << std::endl;
+	std::cout << g << std::endl;
 
 	std::cin.get();
 }

@@ -1,28 +1,40 @@
-//#include "String.h"
+#include "String.h"
+
 
 String::String()
-	: lenght(0), str('\0')
 {
+	length = 0;
+	str = new char[length];
 }
 
-String::String(char* ch)
-	: lenght(strlen(ch)),
-	str(new char[lenght])
+String::String(char ch)
 {
-	strcpy(str, ch, lenght);
+	length = 1;
+	str = new char(ch);
 }
 
 String::String(const char* ch)
-	: lenght(strlen(ch)),
-	str(new char[lenght])
 {
-	strcpy(str, ch, lenght);
+	if (ch) {
+		unsigned i = 0;
+		while (ch[i] != '\0') i++;
+		length = i;
+		str = new char[i];
+		for (unsigned j = 0; j < i; j++)
+			str[j] = ch[j];
+	}
+	else {
+		length = 0;
+		str = new char[length];
+	}
 }
 
-String::String(String& string)
+String::String(const String& string)
 {
-	str = new char[255];
-	strcpy(this->str, string.str);
+	length = string.len();
+	str = new char[length];
+	for (unsigned j = 0; j < length; j++)
+		str[j] = string[j];
 }
 
 String::~String()
@@ -31,25 +43,67 @@ String::~String()
 		delete[] this->str;
 }
 
-String String::operator+(String string) {
-	String s;
-	strcpy(s.str, this->str);
-	strcat(s.str, string.str);
-	return s;
+unsigned String::len() const {
+	return length;
 }
 
-String String::operator+(const String& string)const {
-	String s;
-	strcpy(s.str, this->str);
-	strcat(s.str, string.str);
-	return s;
+void String::clear() {
+	length = 0;
 }
 
-String String::operator=(const String& string) {
-	if (this->str)
-		delete[] this->str;
-	strcpy(this->str, string.str);
+char String::operator[] (unsigned j) const
+{
+	if (j >= length) throw 1;
+	return str[j];
+}
+
+char& String::operator[] (unsigned j)
+{
+	if (j >= this->length) throw 1;
+	return str[j];
+}
+
+String& String::operator+= (const String& s)
+{
+	unsigned len = length + s.len();
+	char*    newstr = new char[len];
+
+	for (unsigned j = 0; j < length; j++)
+		newstr[j] = str[j];
+
+	for (unsigned i = 0; i < s.len(); i++)
+		newstr[length + i] = s[i];
+
+	delete str;
+	length = len;
+	str = newstr;
 	return *this;
+}
+
+String operator+(const String& string_a, const String& string_b) {
+	return String(string_a) += String(string_b);
+}
+
+std::ostream& operator<< (std::ostream& os, const String& s)
+{
+	if (s.len() > 0)
+	{
+		for (unsigned j = 0; j < s.len(); j++)
+			os << s[j];
+	}
+	else os << "";
+
+	return os;
+}
+
+std::istream& operator>> (std::istream& is, String& s)
+{
+	char* c = new char[1000];
+	is >> c;
+	s = String(c);
+	delete[] c;
+
+	return is;
 }
 
 /*char* strcpy(char* destination, char* source)
@@ -63,7 +117,7 @@ String String::operator=(const String& string) {
 
 	*destination = '\0'; // add '\0' at the end
 	return start;
-}*/
+}
 
 char* strcpy(char* destination, char* source, int size) {
 	for (int i = 0; i < size; i++)
@@ -86,9 +140,4 @@ char* strcat(char* destination, char* source)
 	*destination = '\0'; // add '\0' at the end
 	return start;
 }
-
-/*std::ostream& operator <<(std::ostream& OS, String &S)
-{
-	OS << S.get_string();
-	return OS;
-}*/
+*/

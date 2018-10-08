@@ -4,28 +4,28 @@
 
 class String
 {
-private:
-	int lenght;
 	char* str;
-public:
-	//const char* data;
+	unsigned length;
 
+public:
 	String();
-	String(char* ch);
+	String(char ch);
 	String(const char* ch);
-	String(String& string);
+	String(const String& string);
 	~String();
-	char* get_string() { return str; }
-	String operator+(String string);
-	String operator+(const String& string)const;
-	String operator=(const String& string);
+	unsigned len() const;
+	void clear();
+
+	String& operator+= (const String& s);
+	friend String operator+(const String& string_a, const String& string_b);
+	char  operator[] (unsigned j) const;
+	char& operator[] (unsigned j);
+	friend std::ostream& operator<< (std::ostream& so, const String& s);
+	friend std::istream& operator>> (std::istream& so, String& s);
 };
 
 //char* strcpy(char *destination, char *source);
-char* strcpy(char* destination, char* source, int size);
-char* strcat(char* destination, char* source);
-
-//std::ostream& operator <<(std::ostream& OS, String &S);
-//std::istream& operator >>(std::istream& IS, String &S);
+//char* strcpy(char* destination, char* source, int size);
+//char* strcat(char* destination, char* source);
 
 #endif
