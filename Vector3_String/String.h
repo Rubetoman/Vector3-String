@@ -18,8 +18,8 @@ public:
 
 	String& operator+= (const String& s);
 	friend String operator+(const String& string_a, const String& string_b);
-	char  operator[] (unsigned j) const;
-	char& operator[] (unsigned j);
+	inline char  operator[] (unsigned j) const;
+	inline char& operator[] (unsigned j);
 	friend std::ostream& operator<< (std::ostream& so, const String& s);
 	friend std::istream& operator>> (std::istream& so, String& s);
 };

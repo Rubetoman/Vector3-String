@@ -1,5 +1,5 @@
 #include "String.h"
-
+#include <assert.h> 
 
 String::String()
 {
@@ -15,18 +15,14 @@ String::String(char ch)
 
 String::String(const char* ch)
 {
-	if (ch) {
-		unsigned i = 0;
-		while (ch[i] != '\0') i++;
-		len = i;
-		str = new char[i];
-		for (unsigned j = 0; j < i; j++)
-			str[j] = ch[j];
-	}
-	else {
-		len = 0;
-		str = new char[len];
-	}
+	assert (ch);
+	unsigned i = 0;
+	while (ch[i] != '\0') i++;
+	len = i;
+	str = new char[i];
+	for (unsigned j = 0; j < i; j++)
+		str[j] = ch[j];
+
 }
 
 String::String(const String& string)
@@ -43,23 +39,24 @@ String::~String()
 		delete[] this->str;
 }
 
-unsigned String::length() const {
+inline unsigned String::length() const {
 	return len;
 }
 
 void String::clear() {
+	delete str;
 	len = 0;
 }
 
-char String::operator[] (unsigned j) const
+inline char String::operator[] (unsigned j) const
 {
-	if (j >= len) throw 1;
+	assert (j < len);
 	return str[j];
 }
 
-char& String::operator[] (unsigned j)
+inline char& String::operator[] (unsigned j)
 {
-	if (j >= this->len) throw 1;
+	assert (j >= this->len);
 	return str[j];
 }
 
@@ -86,12 +83,9 @@ String operator+(const String& string_a, const String& string_b) {
 
 std::ostream& operator<< (std::ostream& os, const String& s)
 {
-	if (s.length() > 0)
-	{
-		for (unsigned j = 0; j < s.length(); j++)
-			os << s[j];
-	}
-	else os << "";
+
+	for (unsigned j = 0; j < s.length(); j++)
+		os << s[j];
 
 	return os;
 }

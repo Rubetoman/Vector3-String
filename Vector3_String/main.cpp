@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Vec3.cpp"
+#include "Vec3.h"
 #include "String.h"
 
 int main() {
