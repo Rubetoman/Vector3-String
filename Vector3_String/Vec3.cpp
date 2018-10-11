@@ -46,17 +46,17 @@ float Vec3<T>::distance_to(Vec3 vec) {
 	T sumX = vec.x - x;
 	T sumY = vec.y - y;
 	T sumZ = vec.z - z;
-	return sqrt((sumX * sumX) + (sumY * sumY) + (sumZ* sumZ));
+	return sqrt(pow(sumX, 2) + pow(sumY, 2) + pow(sumY, 2));
 }
 
 template<typename T>
 Vec3<T> Vec3<T>::Normalize() {
-	float lenght = 1 / distance_to(Vec3<T>(.0f, .0f, .0f));
+	float lenght = distance_to(Vec3<T>(.0f, .0f, .0f));
 
 	Vec3<T> newVec;
-	newVec.x = x * lenght;
-	newVec.y = y * lenght;
-	newVec.z = z * lenght;
+	newVec.x = x / lenght;
+	newVec.y = y / lenght;
+	newVec.z = z / lenght;
 
 	return newVec;
 }
